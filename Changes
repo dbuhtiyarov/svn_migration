@@ -1,0 +1,218 @@
+------------------------------------------------------------------------
+r22777 | jm | 2004-07-10 02:44:52 +0000 (Sat, 10 Jul 2004) | 1 line
+
+fixing more bugs in this process.  argh
+------------------------------------------------------------------------
+r22776 | jm | 2004-07-10 02:40:39 +0000 (Sat, 10 Jul 2004) | 1 line
+
+version.env was NOT working, build fails.  now fixed.
+------------------------------------------------------------------------
+r22775 | jm | 2004-07-10 02:19:57 +0000 (Sat, 10 Jul 2004) | 1 line
+
+prepare for 3.0.0-pre2 release
+------------------------------------------------------------------------
+r22773 | jm | 2004-07-10 01:39:56 +0000 (Sat, 10 Jul 2004) | 1 line
+
+cleaning up deleted, but still hanging around, lib/Mail/SpamAssassin/SHA1.pm
+------------------------------------------------------------------------
+r22766 | felicity | 2004-07-09 22:31:20 +0000 (Fri, 09 Jul 2004) | 1 line
+
+bug 3553: if in report_safe mode, and rewrite_header was set, and the message didn't have that header to rewrite, report_safe would add it without a newline at the end, so we'd have multiple headers in one line.  Now, if the header doesn't exist in the original, assume it was blank (just a newline) so the output ends up correct.
+------------------------------------------------------------------------
+r22765 | felicity | 2004-07-09 22:29:05 +0000 (Fri, 09 Jul 2004) | 1 line
+
+bug 3582: Exim can put the port numbers in the Received header if port number logging is enabled.  Update the Received-header parsing to take the port numbers into account.
+------------------------------------------------------------------------
+r22764 | parker | 2004-07-09 22:07:24 +0000 (Fri, 09 Jul 2004) | 1 line
+
+Bug 3488: Turn off bayes tests during init
+------------------------------------------------------------------------
+r22763 | felicity | 2004-07-09 21:34:36 +0000 (Fri, 09 Jul 2004) | 1 line
+
+bug 3578: when folding headers to add to the message, it is sometimes possible to have a blank whitespace-folded line inserted in-between non-blank folded lines.  this is invalid according to RFC2822, so we should trim out the blank header line before it's added to the message.
+------------------------------------------------------------------------
+r22762 | felicity | 2004-07-09 21:31:39 +0000 (Fri, 09 Jul 2004) | 1 line
+
+bug 2512: The Bat v2 can send HTML-only mails, so our FORGED_THEBAT_HTML rule needs to look for only v1 mails that are HTML-only to avoid FPs.
+------------------------------------------------------------------------
+r22761 | felicity | 2004-07-09 21:29:13 +0000 (Fri, 09 Jul 2004) | 1 line
+
+small doco update
+------------------------------------------------------------------------
+r22757 | felicity | 2004-07-09 19:37:20 +0000 (Fri, 09 Jul 2004) | 1 line
+
+bug 3583: compiling spamc with SSL support caused gcc to throw a warning in libspamc.  simply set the variable to NULL and let the code initialize it in the next section as before (gcc doesn't deal with the ifdef/return business apparently).
+------------------------------------------------------------------------
+r22745 | jm | 2004-07-09 02:09:24 +0000 (Fri, 09 Jul 2004) | 1 line
+
+bug 3528: additional documentation fix for other Makefile.PL prompts
+------------------------------------------------------------------------
+r22744 | jm | 2004-07-09 02:07:18 +0000 (Fri, 09 Jul 2004) | 1 line
+
+bug 3528: documentation fix for Makefile.PL prompt on network tests
+------------------------------------------------------------------------
+r22743 | jm | 2004-07-09 01:57:11 +0000 (Fri, 09 Jul 2004) | 1 line
+
+backend web-build tweak: ensure Makefile.PL has been built
+------------------------------------------------------------------------
+r22742 | felicity | 2004-07-09 01:29:10 +0000 (Fri, 09 Jul 2004) | 1 line
+
+reverting a rule that shouldn't have been committed.  oops.
+------------------------------------------------------------------------
+r22741 | felicity | 2004-07-09 01:28:32 +0000 (Fri, 09 Jul 2004) | 1 line
+
+bug 3579: fix description -- double INVALID_TZ_CST, one should be EST
+------------------------------------------------------------------------
+r22687 | hstern | 2004-07-08 00:05:58 +0000 (Thu, 08 Jul 2004) | 4 lines
+
+* CREDITS
+
+  Adding Henry Stern to the list of active committers.
+
+------------------------------------------------------------------------
+r22685 | felicity | 2004-07-07 21:36:52 +0000 (Wed, 07 Jul 2004) | 1 line
+
+bug 3517: if both userstate_dir and user_dir were specified, user_dir would be used to derive userstate_dir even though it was explicitly specified.  the code will now use userstate_dir if defined, then derive from user_dir if possible, then revert to the system default if nothing else is available.
+------------------------------------------------------------------------
+r22683 | felicity | 2004-07-07 19:55:44 +0000 (Wed, 07 Jul 2004) | 1 line
+
+bug 3571: version information from spamc/spamd should goto stdout not stderr.  also, output information on SSL support if available.
+------------------------------------------------------------------------
+r22682 | felicity | 2004-07-07 19:50:35 +0000 (Wed, 07 Jul 2004) | 1 line
+
+bug 3565: setting envelope_sender_header to anything but the default wouldn't work + cause undefined warnings.  oops.
+------------------------------------------------------------------------
+r22681 | quinlan | 2004-07-07 19:28:14 +0000 (Wed, 07 Jul 2004) | 3 lines
+
+bug 3359: M::SA::Util::secure_tmpfile() only allows 1 file to be used at
+a time (simple fix from Rudolph Pereira)
+
+------------------------------------------------------------------------
+r22679 | felicity | 2004-07-07 17:52:52 +0000 (Wed, 07 Jul 2004) | 1 line
+
+updated spamd pod doco per bug 3577
+------------------------------------------------------------------------
+r22633 | felicity | 2004-07-06 16:16:39 +0000 (Tue, 06 Jul 2004) | 1 line
+
+doco updates for upgrading doc
+------------------------------------------------------------------------
+r22631 | mss | 2004-07-06 15:32:18 +0000 (Tue, 06 Jul 2004) | 2 lines
+
+bug 3569: made ENABLE_SSL=yes actually work with spamc on nin-Windows systems
+
+------------------------------------------------------------------------
+r22629 | felicity | 2004-07-06 15:08:31 +0000 (Tue, 06 Jul 2004) | 1 line
+
+small razor/INSTALL doco update
+------------------------------------------------------------------------
+r22603 | mss | 2004-07-05 21:32:22 +0000 (Mon, 05 Jul 2004) | 6 lines
+
+bug 3523:
+* Create tarballs with x.y.z version numbers instead of x.yyy.zzz.
+* Made the script fail if something went wrong.
+* Renamed the daily build -cvs to -dev. This got to be "ported" to the ASF way of doing nightly builds.
+
+
+------------------------------------------------------------------------
+r22512 | felicity | 2004-07-03 22:13:14 +0000 (Sat, 03 Jul 2004) | 1 line
+
+doco update for required_version.
+------------------------------------------------------------------------
+r22494 | felicity | 2004-07-02 23:37:13 +0000 (Fri, 02 Jul 2004) | 1 line
+
+some doco updates regarding --sync and --no-sync
+------------------------------------------------------------------------
+r22492 | quinlan | 2004-07-02 21:02:58 +0000 (Fri, 02 Jul 2004) | 2 lines
+
+need to require Digest::SHA1 module
+
+------------------------------------------------------------------------
+r22438 | felicity | 2004-07-01 19:09:43 +0000 (Thu, 01 Jul 2004) | 1 line
+
+bug 3551: it was decided that the SHA1 hash was really integral to SA, and therefore having Digest::SHA1 required was better than the relatively very slow perl version that we shipped while the SHA1 module was optional.
+------------------------------------------------------------------------
+r22395 | quinlan | 2004-06-30 21:07:35 +0000 (Wed, 30 Jun 2004) | 2 lines
+
+tweak
+
+------------------------------------------------------------------------
+r22301 | jm | 2004-06-30 03:33:42 +0000 (Wed, 30 Jun 2004) | 1 line
+
+do not use bash, use sh
+------------------------------------------------------------------------
+r22300 | jm | 2004-06-30 03:33:02 +0000 (Wed, 30 Jun 2004) | 1 line
+
+do not use bash, use sh
+------------------------------------------------------------------------
+r22298 | jm | 2004-06-30 03:30:07 +0000 (Wed, 30 Jun 2004) | 1 line
+
+change build path for website docs
+------------------------------------------------------------------------
+r22275 | mss | 2004-06-29 22:44:50 +0000 (Tue, 29 Jun 2004) | 2 lines
+
+bug 3550: the fix for bug 3527 broke spamd for protocol version 1.0. removed that over-zealous optimization of mine which made it break.
+
+------------------------------------------------------------------------
+r22273 | felicity | 2004-06-29 19:34:52 +0000 (Tue, 29 Jun 2004) | 1 line
+
+bug 3548: .su is a deprecated tld, so we should support it until it's completely replaced.
+------------------------------------------------------------------------
+r22244 | mss | 2004-06-28 18:14:08 +0000 (Mon, 28 Jun 2004) | 2 lines
+
+Replace tabs with spaces.
+
+------------------------------------------------------------------------
+r22242 | parker | 2004-06-28 18:04:23 +0000 (Mon, 28 Jun 2004) | 1 line
+
+Update help for --import
+------------------------------------------------------------------------
+r22228 | sidney | 2004-06-28 05:43:07 +0000 (Mon, 28 Jun 2004) | 1 line
+
+bug 3550: back out fix of bug 3527 which breaks regression test and reopen 3527 until we figure out proper fix
+------------------------------------------------------------------------
+r22226 | felicity | 2004-06-28 04:29:26 +0000 (Mon, 28 Jun 2004) | 1 line
+
+bug 3535: RPM spec file referenced Razor2.patch which no longer comes in the SA distro.  Also, it was trying to copy both README and spamd/README into the same place.  Rename spamd/README to spamd/README.spamd so that both can be installed.
+------------------------------------------------------------------------
+r22225 | jm | 2004-06-28 04:00:56 +0000 (Mon, 28 Jun 2004) | 1 line
+
+bug 3539: syntax errors in urirhsbl, uridnsbl and urirhssub lines were being ignored, fixed
+------------------------------------------------------------------------
+r22224 | jm | 2004-06-28 03:59:01 +0000 (Mon, 28 Jun 2004) | 1 line
+
+added note about TEST_VERBOSE
+------------------------------------------------------------------------
+r22223 | quinlan | 2004-06-28 03:57:33 +0000 (Mon, 28 Jun 2004) | 2 lines
+
+bug 3546: add recent SURBL lists
+
+------------------------------------------------------------------------
+r22222 | quinlan | 2004-06-28 03:56:10 +0000 (Mon, 28 Jun 2004) | 2 lines
+
+trivial patch to die() if opening a log file for writing fails
+
+------------------------------------------------------------------------
+r22220 | jm | 2004-06-28 03:52:09 +0000 (Mon, 28 Jun 2004) | 1 line
+
+bug 3543: update TRADEMARK file wih new details
+------------------------------------------------------------------------
+r22219 | felicity | 2004-06-28 03:33:03 +0000 (Mon, 28 Jun 2004) | 1 line
+
+bug 3533: some tools still were trying to use NoMailAudit and the 2.x API.  Updated to work with the 3.0 API
+------------------------------------------------------------------------
+r22211 | sidney | 2004-06-28 02:45:04 +0000 (Mon, 28 Jun 2004) | 1 line
+
+bug 3527: fix off by one error that broke SSL
+------------------------------------------------------------------------
+r22210 | sidney | 2004-06-28 02:38:35 +0000 (Mon, 28 Jun 2004) | 1 line
+
+bug 3541: add BUILD_SPAMC option in Windows, update readme, fix warning in getopt.c
+------------------------------------------------------------------------
+r22197 | striker | 2004-06-27 12:59:51 +0000 (Sun, 27 Jun 2004) | 5 lines
+
+* incubator/spamassassin/
+* spamassassin/
+
+  Move spamassassin from the incubator to top level.
+
+------------------------------------------------------------------------
